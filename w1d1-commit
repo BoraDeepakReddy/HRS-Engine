@@ -1,0 +1,44 @@
+-- src/main/resources/db/migration/V1__init_schema.sql
+
+CREATE EXTENSION IF NOT EXISTS btree_gist;
+
+CREATE TABLE hotels (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE room_types (
+    id BIGSERIAL PRIMARY KEY,
+    hotel_id BIGINT NOT NULL REFERENCES hotels(id) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
+    base_price NUMERIC(10, 2) NOT NULL,
+    capacity INT NOT NULL
+);
+
+CREATE TABLE rooms (
+    id BIGSERIAL PRIMARY KEY,
+    room_type_id BIGINT NOT NULL REFERENCES room_types(id) ON DELETE CASCADE,
+    room_number VARCHAR(50) NOT NULL,
+    status VARCHAR(50) DEFAULT 'AVAILABLE',
+    UNIQUE(room_type_id, room_number)
+);
+
+CREATE TABLE reservations (
+    id BIGSERIAL PRIMARY KEY,
+    room_id BIGINT NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
+    check_in_date DATE NOT NULL,
+    check_out_date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL, -- HELD, CONFIRMED, CANCELLED
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_dates CHECK (check_out_date > check_in_date),
+    -- Database-level protection against double-booking confirmed/held slots
+    EXCLUDE USING gist (
+        room_id WITH =,
+        daterange(check_in_date, check_out_date, '[)') WITH &&
+    ) WHERE (status IN ('HELD', 'CONFIRMED'))
+);
+
+CREATE INDEX idx_reservations_dates ON reservations (check_in_date, check_out_date);
+CREATE INDEX idx_rooms_type ON rooms (room_type_id);

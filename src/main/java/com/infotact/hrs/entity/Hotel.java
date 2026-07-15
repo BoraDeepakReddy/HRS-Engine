@@ -1,7 +1,9 @@
 package com.infotact.hrs.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
+import com.infotact.hrs.entity.RoomType;;
 @Entity
 @Table(name = "hotels")
 public class Hotel {
@@ -15,6 +17,9 @@ public class Hotel {
     private String location;
 
     private int totalRooms;
+     
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+private List<RoomType> roomTypes;
 
     public Hotel() {
     }

@@ -1,6 +1,7 @@
 package com.infotact.hrs.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "room_types")
@@ -17,6 +18,8 @@ public class RoomType {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+private List<Room> rooms;
 
     public RoomType() {
     }
@@ -52,4 +55,11 @@ public class RoomType {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+    public List<Room> getRooms() {
+    return rooms;
+}
+
+public void setRooms(List<Room> rooms) {
+    this.rooms = rooms;
+}
 }

@@ -21,6 +21,9 @@ public class Hotel {
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 private List<RoomType> roomTypes;
 
+@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+private List<Room> rooms;
+
     public Hotel() {
     }
 
@@ -55,4 +58,19 @@ private List<RoomType> roomTypes;
     public void setTotalRooms(int totalRooms) {
         this.totalRooms = totalRooms;
     }
+    public List<RoomType> getRoomTypes() {
+    return roomTypes;
+}
+
+public void setRoomTypes(List<RoomType> roomTypes) {
+    this.roomTypes = roomTypes;
+}
+
+public List<Room> getRooms() {
+    return rooms;
+}
+
+public void setRooms(List<Room> rooms) {
+    this.rooms = rooms;
+}
 }

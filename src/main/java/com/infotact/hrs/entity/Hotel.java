@@ -1,6 +1,8 @@
 package com.infotact.hrs.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "hotels")
@@ -10,10 +12,13 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Hotel name is required")
     private String hotelName;
 
+    @NotBlank(message = "Location is required")
     private String location;
 
+    @Min(value = 1, message = "Total rooms must be at least 1")
     private int totalRooms;
 
     public Hotel() {

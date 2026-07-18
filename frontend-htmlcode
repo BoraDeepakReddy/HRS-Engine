@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEase | Hotel Reservations</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        /* Baseline styling override for clean background */
+        body {
+            background-color: #f8fafc; /* slate-50 */
+            color: #0f172a; /* slate-900 */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-blue-600 tracking-tight">StayEase</span>
+                </div>
+                <!-- Navigation Items -->
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+                    <a href="#" class="hover:text-blue-600 transition">Find Stays</a>
+                    <a href="#" class="hover:text-blue-600 transition">Manage Bookings</a>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-xs cursor-pointer">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Body (Home View) -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+                Find your next perfect stay
+            </h1>
+            <p class="text-lg text-slate-600">
+                Search deals on hotels, homes, and much more...
+            </p>
+        </div>
+
+        <!-- Search Bar Interface Wrapper -->
+        <form class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4" onsubmit="event.preventDefault();">
+            <!-- Input 1: Destination -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Where are you going?</label>
+                <input type="text" placeholder="e.g., Paris, New York" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:border-blue-500" required>
+            </div>
+            <!-- Input 2: Check-in Date -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Check-in Date</label>
+                <input type="date" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:border-blue-500" required>
+            </div>
+            <!-- Input 3: Guest Selection -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Guests</label>
+                <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:border-blue-500">
+                    <option value="1">1 guest</option>
+                    <option value="2" selected>2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4+ guests</option>
+                </select>
+            </div>
+            <!-- Action Button -->
+            <div class="flex items-end">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition shadow-xs cursor-pointer">
+                    Search Hotels
+                </button>
+            </div>
+        </form>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-slate-500">
+            &copy; 2026 StayEase Inc. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

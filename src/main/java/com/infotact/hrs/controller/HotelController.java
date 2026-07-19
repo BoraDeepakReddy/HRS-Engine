@@ -1,6 +1,7 @@
 package com.infotact.hrs.controller;
 
 import com.infotact.hrs.entity.Hotel;
+import java.util.Optional;
 import com.infotact.hrs.service.HotelService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class HotelController {
         return hotelService.getAllHotels();
     }
 
-    @GetMapping("/{id}")
-    public Hotel getHotelById(@PathVariable Long id) {
-        return hotelService.getHotelById(id);
-    }
+   @GetMapping("/{id}")
+public Optional<Hotel> getHotelById(@PathVariable Long id) {
+    return hotelService.getHotelById(id);
+}
 
     @PutMapping("/{id}")
     public Hotel updateHotel(@PathVariable Long id,

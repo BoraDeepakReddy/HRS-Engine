@@ -1,5 +1,5 @@
 package com.infotact.hrs.service;
-
+import java.util.List;
 import com.infotact.hrs.dto.ReservationRequestDTO;
 import com.infotact.hrs.dto.ReservationResponseDTO;
 import com.infotact.hrs.entity.Reservation;
@@ -24,6 +24,15 @@ public class ReservationService {
         Room room = roomRepository.findById(request.getRoomId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
+     // Check if room is already booked for the requested dates
+if (!reservationRepository.findOverlappingReservations(
+        request.getRoomId(),
+        request.getCheckInDate(),
+        request.getCheckOutDate()).isEmpty()) {
+
+    throw new RuntimeException("Room is already booked for the selected dates.");
+}
+
         Reservation reservation = new Reservation();
 
         reservation.setGuestName(request.getGuestName());
@@ -47,4 +56,12 @@ public class ReservationService {
 
         return response;
     }
+    public List<Reservation> getAllReservations() {
+    return reservationRepository.findAll();
+}
+
+public Reservation getReservationById(Long id) {
+    return reservationRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Reservation not found"));
+}
 }

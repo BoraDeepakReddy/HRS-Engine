@@ -9,6 +9,8 @@ import com.infotact.hrs.repository.ReservationRepository;
 import com.infotact.hrs.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.infotact.hrs.exception.ResourceNotFoundException;
+import com.infotact.hrs.exception.RoomNotAvailableException;
 
 @Service
 public class ReservationService {
@@ -22,15 +24,14 @@ public class ReservationService {
     public ReservationResponseDTO createReservation(ReservationRequestDTO request) {
 
         Room room = roomRepository.findById(request.getRoomId())
-                .orElseThrow(() -> new RuntimeException("Room not found"));
-
+                .orElseThrow(() -> new ResourceNotFoundException("Room not found"));
      // Check if room is already booked for the requested dates
 if (!reservationRepository.findOverlappingReservations(
         request.getRoomId(),
         request.getCheckInDate(),
         request.getCheckOutDate()).isEmpty()) {
 
-    throw new RuntimeException("Room is already booked for the selected dates.");
+    throw new RoomNotAvailableException("Room is already booked for the selected dates.");
 }
 
         Reservation reservation = new Reservation();

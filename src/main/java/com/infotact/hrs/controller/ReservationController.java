@@ -6,7 +6,7 @@ import com.infotact.hrs.entity.Reservation;
 import com.infotact.hrs.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
@@ -15,11 +15,11 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @PostMapping
-    public ReservationResponseDTO createReservation(
-            @RequestBody ReservationRequestDTO request) {
+public ReservationResponseDTO createReservation(
+        @Valid @RequestBody ReservationRequestDTO requestDTO) {
 
-        return reservationService.createReservation(request);
-    }
+    return reservationService.createReservation(requestDTO);
+}
     @GetMapping
 public List<Reservation> getAllReservations() {
     return reservationService.getAllReservations();

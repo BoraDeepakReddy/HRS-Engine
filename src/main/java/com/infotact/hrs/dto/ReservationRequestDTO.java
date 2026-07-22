@@ -1,15 +1,28 @@
 package com.infotact.hrs.dto;
 
 import java.time.LocalDate;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 public class ReservationRequestDTO {
+@NotBlank(message = "Guest name is required")
+private String guestName;
 
-    private String guestName;
-    private String guestEmail;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private Long roomId;
+@Email(message = "Invalid email")
+@NotBlank(message = "Email is required")
+private String guestEmail;
 
+@NotNull(message = "Check-in date is required")
+@Future(message = "Check-in date must be in the future")
+private LocalDate checkInDate;
+
+@NotNull(message = "Check-out date is required")
+@Future(message = "Check-out date must be in the future")
+private LocalDate checkOutDate;
+
+@NotNull(message = "Room ID is required")
+private Long roomId;
     public ReservationRequestDTO() {
     }
 

@@ -1,16 +1,19 @@
 package com.infotact.hrs.service;
+
 import java.util.List;
+
 import com.infotact.hrs.dto.ReservationRequestDTO;
 import com.infotact.hrs.dto.ReservationResponseDTO;
 import com.infotact.hrs.entity.Reservation;
 import com.infotact.hrs.entity.Room;
 import com.infotact.hrs.enums.ReservationStatus;
-import com.infotact.hrs.repository.ReservationRepository;
-import com.infotact.hrs.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.infotact.hrs.exception.ResourceNotFoundException;
 import com.infotact.hrs.exception.RoomNotAvailableException;
+import com.infotact.hrs.repository.ReservationRepository;
+import com.infotact.hrs.repository.RoomRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationService {
@@ -23,16 +26,23 @@ public class ReservationService {
 
     public ReservationResponseDTO createReservation(ReservationRequestDTO request) {
 
+        // Check if room exists
         Room room = roomRepository.findById(request.getRoomId())
                 .orElseThrow(() -> new ResourceNotFoundException("Room not found"));
-     // Check if room is already booked for the requested dates
-if (!reservationRepository.findOverlappingReservations(
-        request.getRoomId(),
-        request.getCheckInDate(),
-        request.getCheckOutDate()).isEmpty()) {
 
-    throw new RoomNotAvailableException("Room is already booked for the selected dates.");
-}
+        // Check if checkout date is after check-in date
+        if (!request.getCheckOutDate().isAfter(request.getCheckInDate())) {
+            throw new IllegalArgumentException("Check-out date must be after check-in date");
+        }
+
+        // Check if room is already booked
+        if (!reservationRepository.findOverlappingReservations(
+                request.getRoomId(),
+                request.getCheckInDate(),
+                request.getCheckOutDate()).isEmpty()) {
+
+            throw new RoomNotAvailableException("Room is already booked for the selected dates.");
+        }
 
         Reservation reservation = new Reservation();
 
@@ -57,12 +67,15 @@ if (!reservationRepository.findOverlappingReservations(
 
         return response;
     }
-    public List<Reservation> getAllReservations() {
-    return reservationRepository.findAll();
-}
 
-public Reservation getReservationById(Long id) {
-    return reservationRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Reservation not found"));
-}
+    // Get all reservations
+    public List<Reservation> getAllReservations() {
+        return reservationRepository.findAll();
+    }
+
+    // Get reservation by ID
+    public Reservation getReservationById(Long id) {
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Reservation not found"));
+    }
 }

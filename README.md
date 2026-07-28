@@ -1,264 +1,36 @@
-# HRS-Engine
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Hotel Reservation System
+## Getting Started
 
-HRS-Engine is a Hotel Reservation System developed using Spring Boot. The project is designed to manage hotels, rooms, customers, reservations, and payments through RESTful APIs. The application follows a layered architecture using Entity, Repository, Service, and Controller layers.
+First, run the development server:
 
----
-
-# Project Objective
-
-The objective of this project is to build a scalable Hotel Reservation System that allows administrators to manage hotels and rooms while enabling customers to book rooms efficiently.
-
----
-
-# Tech Stack
-
-- Java 21
-- Spring Boot 4.1.0
-- Spring Data JPA
-- Hibernate ORM
-- PostgreSQL
-- Maven
-- REST APIs
-- Postman
-- Git & GitHub
-
----
-
-# Project Architecture
-
-```
-Client
-   │
-REST API
-   │
-Controller Layer
-   │
-Service Layer
-   │
-Repository Layer
-   │
-PostgreSQL Database
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-# Project Structure
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-HRS-Engine
-│
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com.infotact.hrs
-│   │   │       ├── controller
-│   │   │       │      ├── HotelController.java
-│   │   │       │      ├── RoomController.java
-│   │   │       │      ├── CustomerController.java
-│   │   │       │      ├── ReservationController.java
-│   │   │       │      └── PaymentController.java
-│   │   │       │
-│   │   │       ├── entity
-│   │   │       │      ├── Hotel.java
-│   │   │       │      ├── Room.java
-│   │   │       │      ├── Customer.java
-│   │   │       │      ├── Reservation.java
-│   │   │       │      └── Payment.java
-│   │   │       │
-│   │   │       ├── repository
-│   │   │       ├── service
-│   │   │       └── HrsEngineApplication.java
-│   │   │
-│   │   └── resources
-│   │          └── application.properties
-│   │
-│   └── test
-│
-├── pom.xml
-├── mvnw
-├── mvnw.cmd
-└── README.md
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
----
+## Learn More
 
-# Modules
+To learn more about Next.js, take a look at the following resources:
 
-## 1. Hotel Module
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Features
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Add Hotel
-- View All Hotels
-- View Hotel by ID
-- Update Hotel
-- Delete Hotel
-- Hotel Validation
+## Deploy on Vercel
 
-### APIs
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-| Method | Endpoint |
-|---------|-----------|
-| POST | /api/hotels |
-| GET | /api/hotels |
-| GET | /api/hotels/{id} |
-| PUT | /api/hotels/{id} |
-| DELETE | /api/hotels/{id} |
-
----
-
-## 2. Room Module
-
-### Features
-
-- Add Room
-- View All Rooms
-- View Room by ID
-- Update Room
-- Delete Room
-
-### APIs
-
-| Method | Endpoint |
-|---------|-----------|
-| POST | /api/rooms |
-| GET | /api/rooms |
-| GET | /api/rooms/{id} |
-| PUT | /api/rooms/{id} |
-| DELETE | /api/rooms/{id} |
-
----
-
-## 3. Customer Module (Upcoming)
-
-### Planned Features
-
-- Add Customer
-- View Customers
-- Update Customer
-- Delete Customer
-
----
-
-## 4. Reservation Module (Upcoming)
-
-### Planned Features
-
-- Book Room
-- Cancel Reservation
-- Check Availability
-- Reservation History
-
----
-
-## 5. Payment Module (Upcoming)
-
-### Planned Features
-
-- Payment Processing
-- Payment Status
-- Payment History
-
----
-
-# Sample Request
-
-## Add Hotel
-
-```json
-{
-  "hotelName": "Taj Hotel",
-  "location": "Hyderabad",
-  "totalRooms": 120
-}
-```
-
----
-
-## Add Room
-
-```json
-{
-  "roomNumber": "101",
-  "roomType": "Deluxe",
-  "pricePerNight": 3500,
-  "available": true
-}
-```
-
----
-
-# Database
-
-**Database:** PostgreSQL
-
-**Database Name:**
-
-```
-hrs_db
-```
-
-### Tables
-
-- hotels
-- rooms
-- customers (planned)
-- reservations (planned)
-- payments (planned)
-
----
-
-# Current Project Status
-
-### Completed
-
-- Spring Boot Setup
-- PostgreSQL Configuration
-- Hotel Module
-- Hotel CRUD APIs
-- Hotel Validation
-- Room Module
-- Room CRUD APIs
-- Postman Testing
-
-### In Progress
-
-- Customer Module
-
-### Planned
-
-- Reservation Module
-- Payment Module
-- Authentication & Authorization
-- Exception Handling
-- Swagger API Documentation
-- Unit Testing
-- Docker Deployment
-
----
-
-# Future Enhancements
-
-- JWT Authentication
-- Role-Based Access Control
-- Email Notifications
-- Online Payment Gateway
-- Room Availability Calendar
-- Reports & Analytics
-- Cloud Deployment
-
----
-
-# Developed By
-
-**Bora Deepak Reddy**
-
-Intern – Infotact Solutions
-
----
-
-# License
-
-This project is developed for learning and internship purposes.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

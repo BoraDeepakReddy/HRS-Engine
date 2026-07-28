@@ -1,0 +1,4 @@
+com\infotact\hrs\entity\Hotel.class
+com\infotact\hrs\HrsEngineApplication.class
+com\infotact\hrs\repository\HotelRepository.class
+com\infotact\hrs\service\HotelService.class
